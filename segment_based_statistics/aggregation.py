@@ -132,42 +132,59 @@ def plotAggregatedStatistics(edgeset, col = 'speed'):
     r.to_html("line_layer.html", iframe_width=900)
 
 
-def TimeBasedAggreagating(concatTracks, hourly, daily, monthly, pTo = False):
+def TimeBasedAggreagating(concatTracks, hourly, daily, monthly, pTo = False ):
+    """
+    Filter data by hour, day, month 
+
+    Parameters:
+
+    hourly(int) - Hour should be passed by incrementing 1, since hour range is 0-23hrs, 
+                    e.g. tracks between 00:00 to 01:00 should pass as 1
+    daily(int) - In this function, day is decremented by 1 dince starts from 0-6
+                    e.g. Monday - 0, Friday - 4
+    monthly(int) - month is always 1-12
+    pTo(int) - defines ending period for the selected time attribute
+    """
+    
     concatTracks['time'] = pd.to_datetime(concatTracks['time'])
     concatTracks.dtypes
     
     filterTracks = concatTracks 
     
     if hourly:
+        hourly = hourly-1
         if pTo:
             filterTracks['hour'] = filterTracks['time'].dt.hour 
             maskHour = (filterTracks['hour'] >= hourly) & (filterTracks['hour'] <= pTo) 
-            #print(filteredConcatTracksDayTime)
-        
+            filterTracks = filterTracks.loc[maskHour]
+               
         else:
             filterTracks['hour'] = filterTracks['time'].dt.hour 
             maskHour = (filterTracks['hour'] == hourly)
             filterTracks = filterTracks.loc[maskHour]
-        
+           
     if daily:
+        hourly = hourly-1
         if pTo:
             filterTracks['weekday'] = filterTracks['time'].dt.dayofweek 
             maskDay = (filterTracks['weekday'] >= daily) & (filterTracks['weekday'] <= pTo)
             filterTracks = filterTracks.loc[maskDay]
+           
         else:
             filterTracks['weekday'] = filterTracks['time'].dt.dayofweek 
             maskDay = (filterTracks['weekday'] == daily)
             filterTracks = filterTracks.loc[maskDay]
-        
+            
     if monthly: 
         if pTo:
             filterTracks['month'] = filterTracks['time'].dt.month 
             maskMonth = (filterTracks['month'] >= monthly) & (filterTracks['month'] <= pTo)
             filterTracks = filterTracks.loc[maskMonth]
+            
         else:
             filterTracks['month'] = filterTracks['time'].dt.month 
             maskMonth = (filterTracks['month'] == monthly)
             filterTracks = filterTracks.loc[maskMonth]
-    
+            
     return filterTracks
 
