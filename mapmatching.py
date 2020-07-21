@@ -235,6 +235,8 @@ def plot_html(track, track_corr=[],
     
     '''
         This function plot the track
+        This code is heavily inspired from noiseplanet (https://github.com/arthurdjn/noiseplanet)
+        [Dujardin, A., Mermet, S. (2020). Etat de l’art et suggestions pour la cartographie des donne ́es acoustiques mobiles. Projet de recherche.]
     '''
 
     # calculate the center of the map
