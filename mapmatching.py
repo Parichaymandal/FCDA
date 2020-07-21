@@ -1,7 +1,8 @@
 ############################################################################################
 ## This code is created as a part of the study project "Floating Car Data Analysis". 
 ## This code is heavily inspired from noiseplanet (https://github.com/arthurdjn/noiseplanet)
-## abd the code example of enviroCar by Dewall (https://github.com/enviroCar/envirocar-py/blob/master/examples/map_matching_example.ipynb)
+## [Dujardin, A., Mermet, S. (2020). Etat de l’art et suggestions pour la cartographie des donne ́es acoustiques mobiles. Projet de recherche.]
+## and the code example of enviroCar by Dewall (https://github.com/enviroCar/envirocar-py/blob/master/examples/map_matching_example.ipynb)
 ############################################################################################
 
 import pandas as pd
